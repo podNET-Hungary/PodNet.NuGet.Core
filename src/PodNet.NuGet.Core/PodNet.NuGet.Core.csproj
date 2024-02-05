@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="build/PodNet.NuGet.Core.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Description>
+			A project containing the shared source, configuration and resources for development of PodNet NuGet packages. Intended to be only used internally with PodNet packages.
+		</Description>
+		<PackageTags>PodNet, NuGet</PackageTags>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+	</PropertyGroup>
+
+	<Import Project="build/PodNet.NuGet.Core.targets" />
+
+	<ItemGroup>
+		<Content Include="build/*" PackagePath="build" />
+		<Content Include="lib/netstandard2.0/_._" PackagePath="lib/netstandard2.0" />
+	</ItemGroup>
+
+</Project>

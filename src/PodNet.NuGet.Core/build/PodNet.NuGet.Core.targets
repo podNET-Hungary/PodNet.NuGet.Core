@@ -1,0 +1,16 @@
+<Project>
+
+	<PropertyGroup>
+		<PackageId Condition="'$(PackageId)' == ''">$(PodNetPackageName)</PackageId>
+		<Product Condition="'$(Product)' == ''">$(PodNetPackageName)</Product>
+		<RepositoryUrl Condition="'$(RepositoryUrl)' == ''">https://github.com/podNET-Hungary/$(PodNetPackageName)</RepositoryUrl>
+		<PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">$(RepositoryUrl)</PackageProjectUrl>
+		<PackageReleaseNotes Condition="'$(PackageReleaseNotes)' == ''">https://github.com/podNET-Hungary/$(PodNetPackageName)/releases</PackageReleaseNotes>
+	</PropertyGroup>
+	
+	<Target Name="PodNetCheckPack" BeforeTargets="Pack">
+		<Error Condition="'$(Description)' == ''" Text="The MSBuild property 'Description' should be set." />
+		<Error Condition="'$(PackageTags)' == ''" Text="The MSBuild property 'PackageTags' should be set." />
+	</Target>
+
+</Project>

@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{588CF89A-A445-4A06-8FFE-22848A725ECF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PodNet.NuGet.Core", "src\PodNet.NuGet.Core\PodNet.NuGet.Core.csproj", "{80F02452-1E6C-4297-9095-B02321DD9FC1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".root", ".root", "{CCD33224-1999-408E-82B6-A5F23D6DACD8}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.github\workflows\cd-nuget.yml = .github\workflows\cd-nuget.yml
+		Directory.Build.props = Directory.Build.props
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80F02452-1E6C-4297-9095-B02321DD9FC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80F02452-1E6C-4297-9095-B02321DD9FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80F02452-1E6C-4297-9095-B02321DD9FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80F02452-1E6C-4297-9095-B02321DD9FC1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{80F02452-1E6C-4297-9095-B02321DD9FC1} = {588CF89A-A445-4A06-8FFE-22848A725ECF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {68685250-391A-49AA-854D-440A24407872}
+	EndGlobalSection
+EndGlobal

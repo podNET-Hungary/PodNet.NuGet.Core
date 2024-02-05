@@ -1,0 +1,32 @@
+<Project>
+
+	<PropertyGroup>
+		<LangVersion>12</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<PodNetPackageName>$(MSBuildProjectName)</PodNetPackageName>
+		<PodNetIncludeDefaultIcon>true</PodNetIncludeDefaultIcon>
+		<PodNetIncludeDefaultReadmePath>true</PodNetIncludeDefaultReadmePath>
+		<PackageIcon>icon.png</PackageIcon>
+		<IsPackable>true</IsPackable>
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+
+		<!-- Version is to be set via Git tagging triggering the build and supplying that tag to `dotnet pack -p:Version`. -->
+		<Version Condition="'$(Version)' == '' And '$(Configuration)' == 'Debug'">0.0.0-debug</Version>
+		<PackageVersion>$(Version)</PackageVersion>
+		<Authors>podNET Hungary, Gábor Szabó</Authors>
+		<Company>podNET Hungary</Company>
+		<Copyright>Copyright (c) $([System.DateTime]::Now.Year) podNET Hungary</Copyright>
+		<PackageReadMeFile>README.md</PackageReadMeFile>
+		<RepositoryType>git</RepositoryType>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Condition="'$(PodNetIncludeDefaultIcon)' != 'false'" Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="" />
+		<None Condition="'$(PodNetIncludeDefaultReadmePath)' != 'false'" Include="../../README.md" Pack="true" PackagePath="" />
+	</ItemGroup>
+
+</Project>
