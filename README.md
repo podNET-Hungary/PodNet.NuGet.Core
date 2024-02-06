@@ -1,4 +1,4 @@
-# PodNet.NuGet.Core
+# PodNet.NuGet.Core [![Nuget](https://img.shields.io/nuget/v/PodNet.NuGet.Core)](https://www.nuget.org/packages/PodNet.NuGet.Core/)
 
 A project containing the shared source, configuration and resources for development of PodNet NuGet packages.
 
