@@ -9,6 +9,7 @@
 		</Description>
 		<PackageTags>PodNet, NuGet</PackageTags>
 		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<DevelopmentDependency>true</DevelopmentDependency>
 	</PropertyGroup>
 
 	<Import Project="build/PodNet.NuGet.Core.targets" />
