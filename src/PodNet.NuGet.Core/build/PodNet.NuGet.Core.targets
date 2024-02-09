@@ -1,8 +1,6 @@
 <Project>
 
 	<PropertyGroup>
-		<GenerateDocumentationFile Condition="('$(IsRoslynComponent)' != 'true') And ('$(GenerateDocumentationFile)' == '')">true</GenerateDocumentationFile>
-
 		<PackageId Condition="'$(PackageId)' == ''">$(PodNetPackageName)</PackageId>
 		<Product Condition="'$(Product)' == ''">$(PodNetPackageName)</Product>
 		<RepositoryUrl Condition="'$(RepositoryUrl)' == ''">https://github.com/podNET-Hungary/$(PodNetPackageName)</RepositoryUrl>

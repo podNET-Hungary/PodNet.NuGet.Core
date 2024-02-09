@@ -12,6 +12,9 @@
 		<IsPackable>true</IsPackable>
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 
+		<!-- Only set documentation file to be generated if nothing else set it yet. PodNet.Analyzers.Core explicitly sets it to false, because analyzers aren't accessed by user code. -->
+		<GenerateDocumentationFile Condition="('$(IsRoslynComponent)' != 'true') And ('$(GenerateDocumentationFile)' == '')">true</GenerateDocumentationFile>
+
 		<!-- Version is to be set via Git tagging triggering the build and supplying that tag to `dotnet pack -p:Version`. -->
 		<Version Condition="'$(Version)' == '' And '$(Configuration)' == 'Debug'">0.0.0-debug</Version>
 		<PackageVersion>$(Version)</PackageVersion>
