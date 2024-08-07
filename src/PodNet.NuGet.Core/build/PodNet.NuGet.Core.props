@@ -11,7 +11,7 @@
 		<PodNetIncludeDefaultIcon>true</PodNetIncludeDefaultIcon>
 		<PodNetIncludeDefaultReadmePath>true</PodNetIncludeDefaultReadmePath>
 		<PodNetIncludeDefaultSponsorsFile>true</PodNetIncludeDefaultSponsorsFile>
-		<PackageIcon>icon.jpg</PackageIcon>
+		<PackageIcon>icon.png</PackageIcon>
 		<IsPackable>true</IsPackable>
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 
@@ -31,7 +31,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Condition="'$(PodNetIncludeDefaultIcon)' != 'false'" Include="$(MSBuildThisFileDirectory)icon.jpg" Pack="true" PackagePath="" />
+		<None Condition="'$(PodNetIncludeDefaultIcon)' != 'false'" Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="" />
 		<None Condition="'$(PodNetIncludeDefaultReadmePath)' != 'false'" Include="../../README.md" Pack="true" PackagePath="" />
 		<None Condition="'$(PodNetIncludeDefaultSponsorsFile)' != 'false'" Include="$(MSBuildThisFileDirectory)SPONSORS.md" Pack="true" PackagePath="" />
 	</ItemGroup>
