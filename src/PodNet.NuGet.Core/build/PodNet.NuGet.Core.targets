@@ -1,11 +1,9 @@
 <Project>
 
+	<!-- There need to be set in .targets despite being properties, because they depend on other properties usually set in .props or project files prior. -->
 	<PropertyGroup>
-		<PackageId Condition="'$(PackageId)' == ''">$(PodNetPackageName)</PackageId>
-		<Product Condition="'$(Product)' == ''">$(PodNetPackageName)</Product>
-		<RepositoryUrl Condition="'$(RepositoryUrl)' == ''">https://github.com/podNET-Hungary/$(PodNetPackageName)</RepositoryUrl>
-		<PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">$(RepositoryUrl)</PackageProjectUrl>
-		<PackageReleaseNotes Condition="'$(PackageReleaseNotes)' == ''">https://github.com/podNET-Hungary/$(PodNetPackageName)/releases</PackageReleaseNotes>
+		<!-- Only set documentation file to be generated if nothing else set it yet. PodNet.Analyzers.Core explicitly sets it to false, because analyzers aren't accessed by user code. -->
+		<GenerateDocumentationFile Condition="('$(IsRoslynComponent)' != 'true') And ('$(GenerateDocumentationFile)' == '')">true</GenerateDocumentationFile>
 	</PropertyGroup>
 	
 	<Target Name="PodNetCheckPack" BeforeTargets="Pack">
