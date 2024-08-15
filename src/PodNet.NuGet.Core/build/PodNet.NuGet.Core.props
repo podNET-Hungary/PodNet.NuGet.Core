@@ -13,7 +13,8 @@
 		<PodNetIncludeDefaultSponsorsFile>true</PodNetIncludeDefaultSponsorsFile>
 		<PackageIcon>icon.png</PackageIcon>
 		<IsPackable>true</IsPackable>
-		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+		<ContinuousIntegrationBuild Condition="('$(TF_BUILD)' != '') Or ('$(Runner_OS)' != '')">true</ContinuousIntegrationBuild>
+		<GenerateDocumentationFile Condition="'$(IsRoslynComponent)' != 'true'">true</GenerateDocumentationFile>
 
 		<!-- Version is to be set via Git tagging triggering the build and supplying that tag to `dotnet pack -p:Version`. -->
 		<Version Condition="'$(Configuration)' == 'Debug'">0.0.0-debug</Version>

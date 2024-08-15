@@ -1,10 +1,4 @@
 <Project>
-
-	<!-- There need to be set in .targets despite being properties, because they depend on other properties usually set in .props or project files prior. -->
-	<PropertyGroup>
-		<!-- Only set documentation file to be generated if nothing else set it yet. PodNet.Analyzers.Core explicitly sets it to false, because analyzers aren't accessed by user code. -->
-		<GenerateDocumentationFile Condition="('$(IsRoslynComponent)' != 'true') And ('$(GenerateDocumentationFile)' == '')">true</GenerateDocumentationFile>
-	</PropertyGroup>
 	
 	<Target Name="PodNetCheckPack" BeforeTargets="Pack">
 		<Error Condition="'$(Description)' == ''" Text="The MSBuild property 'Description' should be set." />
