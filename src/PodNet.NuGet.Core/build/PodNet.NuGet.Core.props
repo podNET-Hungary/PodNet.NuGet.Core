@@ -17,7 +17,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<IncludeSource>true</IncludeSource>
-		<ContinuousIntegrationBuild Condition="('$(TF_BUILD)' != '') Or ('$(Runner_OS)' != '')">true</ContinuousIntegrationBuild>
+		<ContinuousIntegrationBuild Condition="('$(TF_BUILD)' == 'true') Or ('$(GITHUB_ACTIONS)' == 'true')">true</ContinuousIntegrationBuild>
 		<GenerateDocumentationFile Condition="'$(IsRoslynComponent)' != 'true'">true</GenerateDocumentationFile>
 
 		<!-- Version is to be set via Git tagging triggering the build and supplying that tag to `dotnet pack -p:Version`. -->
