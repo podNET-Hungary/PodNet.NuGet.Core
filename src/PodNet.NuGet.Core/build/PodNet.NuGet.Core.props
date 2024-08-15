@@ -13,6 +13,10 @@
 		<PodNetIncludeDefaultSponsorsFile>true</PodNetIncludeDefaultSponsorsFile>
 		<PackageIcon>icon.png</PackageIcon>
 		<IsPackable>true</IsPackable>
+		<IncludeBuildOutput>true</IncludeBuildOutput>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<IncludeSource>true</IncludeSource>
 		<ContinuousIntegrationBuild Condition="('$(TF_BUILD)' != '') Or ('$(Runner_OS)' != '')">true</ContinuousIntegrationBuild>
 		<GenerateDocumentationFile Condition="'$(IsRoslynComponent)' != 'true'">true</GenerateDocumentationFile>
 

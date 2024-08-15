@@ -9,6 +9,8 @@
 		</Description>
 		<PackageTags>PodNet, NuGet</PackageTags>
 		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<IncludeSymbols>false</IncludeSymbols>
+		<IncludeSource>false</IncludeSource>
 		<DevelopmentDependency>true</DevelopmentDependency>
 	</PropertyGroup>
 
