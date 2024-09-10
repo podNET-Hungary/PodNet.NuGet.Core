@@ -1,14 +1,69 @@
-<Project>
-	<!-- Properties are conditioned on them not being specifically set prior, as this allows
-	for other NuGet .props files in other packages to take precedence. -->
-
-	<PropertyGroup>
-		<PodNetUseNuGetDefaults>true</PodNetUseNuGetDefaults>
-		<PodNetStandardNuGetLibLayout>true</PodNetStandardNuGetLibLayout>
-		<PodNetIncludeDefaultIcon>true</PodNetIncludeDefaultIcon>
-		<PodNetIncludeDefaultReadmePath>true</PodNetIncludeDefaultReadmePath>
-		<PodNetIncludeDefaultSponsorsFile>true</PodNetIncludeDefaultSponsorsFile>
-		<PodNetPackageName>$(MSBuildProjectName)</PodNetPackageName>
+﻿<Project>
+	<!-- Most properties are conditioned on them not being specifically set prior, as this allows
+	     for other NuGet .props files in other packages and Directory.Build.props to take precedence.
+	     This is required because these defaults are 'loose', which should be able to be overridden regardless
+	     of when MSBuild imports the .props for NuGet packages. -->
+	<PropertyGroup Condition="('$(TF_BUILD)' == 'true') Or ('$(GITHUB_ACTIONS)' == 'true')">
+		<Deterministic>true</Deterministic>
+		<DeterministicSourcePaths>true</DeterministicSourcePaths>
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	</PropertyGroup>
+
+	<!-- Supply reasonable defaults if they haven't been set yet. -->
+	<PropertyGroup>
+		<PodNetIncludeDefaultIcon Condition="'$(PodNetIncludeDefaultIcon)' == ''">true</PodNetIncludeDefaultIcon>
+		<PodNetIncludeDefaultReadmePath Condition="'$(PodNetIncludeDefaultReadmePath)' == ''">true</PodNetIncludeDefaultReadmePath>
+		<PodNetIncludeDefaultSponsorsFile Condition="'$(PodNetIncludeDefaultSponsorsFile)' == ''">true</PodNetIncludeDefaultSponsorsFile>
+
+		<!-- This is not conditioned on if it is empty or not, because it is usually explicitly set to false in
+		     Directory.Build.props to allow individual projects to opt-in, which takes precedence over NuGet 
+		     imports. However, including PodNet.NuGet.Core as a PackageReference implies the user wants to set
+		     this to true, even if they want to further configure other properties set by convention later in
+		     this file. Still, setting this here is easily overridable by individual projects by setting it to
+		     false in the project file. -->
+		<IsPackable>true</IsPackable>
+
+		<LangVersion Condition="'$(LangVersion)' == ''">12</LangVersion>
+		<ImplicitUsings Condition="'$(ImplicitUsings)' == ''">enable</ImplicitUsings>
+		<Nullable Condition="'$(Nullable)' == ''">enable</Nullable>
+
+		<PackageId Condition="'$(PackageId)' == ''">$(MSBuildProjectName)</PackageId>
+		<Product Condition="'$(Product)' == ''">$(MSBuildProjectName)</Product>
+
+		<!-- Version is to be set via Git tagging triggering the build and supplying that tag to 
+			 `dotnet pack -p:Version`. -->
+		<Version Condition="'$(Version)' == '' And '$(Configuration)' == 'Debug'">0.0.0-$([System.String]::Copy('$(Configuration)').ToLowerInvariant())</Version>
+		<PackageVersion Condition="'$(PackageVersion)' == ''">$(Version)</PackageVersion>
+		<Authors Condition="'$(Authors)' == ''">podNET Hungary, Gábor Szabó</Authors>
+		<Company Condition="'$(Company)' == ''">podNET Hungary</Company>
+		<Copyright Condition="'$(Copyright)' == ''">Copyright (c) $([System.DateTime]::Now.Year) podNET Hungary</Copyright>
+		<PackageReadMeFile Condition="'$(PackageReadMeFile)' == ''">README.md</PackageReadMeFile>
+		<PackageIcon Condition="'$(PackageIcon)' == ''">icon.png</PackageIcon>
+		<RepositoryType Condition="'$(RepositoryType)' == ''">git</RepositoryType>
+		<RepositoryUrl Condition="'$(RepositoryUrl)' == ''">https://github.com/podNET-Hungary/$(MSBuildProjectName)</RepositoryUrl>
+		<PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">$(RepositoryUrl)</PackageProjectUrl>
+		<PackageReleaseNotes Condition="'$(PackageReleaseNotes)' == ''">https://github.com/podNET-Hungary/$(MSBuildProjectName)/releases</PackageReleaseNotes>
+		<PackageLicenseExpression Condition="'$(PackageLicenseExpression)' == ''">MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance Condition="'$(PackageRequireLicenseAcceptance)' == ''">false</PackageRequireLicenseAcceptance>
+
+		<!-- Build, source, documentation and symbols (used when referenced from the package's lib folder) -->
+		<IncludeBuildOutput Condition="'$(IncludeBuildOutput)' == ''">true</IncludeBuildOutput>
+		<IncludeSymbols Condition="'$(IncludeSymbols)' == ''">true</IncludeSymbols>
+		<IncludeSource Condition="'$(IncludeSource)' == ''">true</IncludeSource>
+		<EmbedAllSources Condition="'$(EmbedAllSources)' == ''">true</EmbedAllSources>
+		<GenerateDocumentationFile Condition="'$(GenerateDocumentationFile)' == ''">true</GenerateDocumentationFile>
+		<SymbolPackageFormat Condition="'$(SymbolPackageFormat)' == ''">snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Condition="'$(PodNetIncludeDefaultIcon)' == 'true'" Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="" />
+		<None Condition="'$(PodNetIncludeDefaultReadmePath)' == 'true' and Exists('../../README.md')" Include="../../README.md" Pack="true" PackagePath="" />
+		<None Condition="'$(PodNetIncludeDefaultSponsorsFile)' == 'true'" Include="$(MSBuildThisFileDirectory)SPONSORS.md" Pack="true" PackagePath="" />
+	</ItemGroup>
+	
+	<Target Name="PodNetCheckPack" BeforeTargets="Pack">
+		<Error Condition="'$(Description)' == ''" Text="The 'Description' MSBuild property should be set." />
+		<Error Condition="'$(PackageTags)' == ''" Text="The 'PackageTags' MSBuild property should be set." />
+	</Target>
 
 </Project>
