@@ -4,21 +4,16 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
-		<Description>
-			A project containing the shared source, configuration and resources for development of PodNet NuGet packages. Intended to be only used internally with PodNet packages.
-		</Description>
+		<Description>A project containing the shared source, configuration and resources for development of PodNet NuGet packages. Intended to be only used internally with PodNet packages.</Description>
 		<PackageTags>PodNet, NuGet</PackageTags>
-		<IncludeBuildOutput>false</IncludeBuildOutput>
-		<IncludeSymbols>false</IncludeSymbols>
-		<IncludeSource>false</IncludeSource>
+		<PodNetStandardNuGetLibLayout>false</PodNetStandardNuGetLibLayout>
 		<DevelopmentDependency>true</DevelopmentDependency>
 	</PropertyGroup>
-
-	<Import Project="build/PodNet.NuGet.Core.targets" />
 
 	<ItemGroup>
 		<Content Include="build/*" PackagePath="build" />
 		<Content Include="lib/netstandard2.0/_._" PackagePath="lib/netstandard2.0" />
 	</ItemGroup>
 
+	<Import Project="build/PodNet.NuGet.Core.targets" />
 </Project>
